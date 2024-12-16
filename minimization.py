@@ -14,5 +14,5 @@ def golden(f: callable, a: float, b: float, tolerance: float) -> list:
         else:
             a = b - d
         calculated_values += 2
-
+    
     return [(a + b) / 2, calculated_values]

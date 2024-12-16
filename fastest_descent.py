@@ -4,7 +4,6 @@ import numdifftools as nd
 import numpy as np
 
 def fastest_descent(tolerance: float, start_x: float, start_y: float):
-    # Target function
     def f(var: list) -> float:
         return pow((var[0] - 1), 2) + pow((var[1] - 3), 2)
 
@@ -48,4 +47,5 @@ def fastest_descent(tolerance: float, start_x: float, start_y: float):
 
         function_values.append(f([new_point[0][0], new_point[1][0]]))
 
+    print(iterations, relaxation_sequence[iterations-1])
     return relaxation_sequence[iterations-1]
