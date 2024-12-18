@@ -29,7 +29,8 @@ class Drawer:
 
   # Заданная функция.
   def __function(self, x1, x2):
-    return pow((x1 - 1), 2) + pow((x2 - 3), 2)
+    #return pow((x1 - 1), 2) + pow((x2 - 3), 2)
+    return x1**2 + x2**2
 
   # Приватный метод добавления точки экстремума на график.
   def __add_point(self, point: Point):

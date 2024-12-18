@@ -2,11 +2,9 @@ import minimization
 
 import numdifftools as nd
 import numpy as np
+from typing import Callable
 
-def fastest_descent(tolerance: float, start_x: float, start_y: float):
-    def f(var: list) -> float:
-        return pow((var[0] - 1), 2) + pow((var[1] - 3), 2)
-
+def fastest_descent(func: Callable, tolerance: float, start_x: float, start_y: float):
     starting_point = np.array([[start_x], [start_y]])
 
     relaxation_sequence = []
@@ -17,9 +15,9 @@ def fastest_descent(tolerance: float, start_x: float, start_y: float):
     relaxation_sequence.append(starting_point)
     iterations += 1
 
-    function_values.append(f([starting_point[0][0], starting_point[1][0]]))
+    function_values.append(func([starting_point[0][0], starting_point[1][0]]))
 
-    df = nd.Gradient(f)
+    df = nd.Gradient(func)
 
     gradient = np.array([[1.], [1.]])
 
@@ -32,7 +30,7 @@ def fastest_descent(tolerance: float, start_x: float, start_y: float):
         def psi(xi):
             x = current_point[0][0] + (-1)*gradient[0][0]*abs(xi)
             y = current_point[1][0] + (-1)*gradient[1][0]*abs(xi)
-            return f([x, y])
+            return func([x, y])
         
         golden_tolerance = 0.0001
         golden_data = minimization.golden(f=psi, a=0., b=0.1, tolerance=golden_tolerance)
@@ -45,7 +43,7 @@ def fastest_descent(tolerance: float, start_x: float, start_y: float):
         relaxation_sequence.append(new_point)
         iterations += 1
 
-        function_values.append(f([new_point[0][0], new_point[1][0]]))
+        function_values.append(func([new_point[0][0], new_point[1][0]]))
 
     print(iterations, relaxation_sequence[iterations-1])
     return relaxation_sequence[iterations-1]
