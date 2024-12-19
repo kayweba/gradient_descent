@@ -15,18 +15,6 @@ class Drawer:
     self.ax.plot_surface(self.X, self.Y, func([self.X , self.Y]), alpha=0.7)
     # Добавляем вычисленную точку на график и отрисовываем сам график.
     #self.__add_point(point)
-
-    #plt.title(label=f'''
-    #          График функции: f(x1, x2) = (x1 - 1)^2 + (x2 - 3)^2\n 
-    #          Интервал: x_min = -1, x_max = 4; y_min = -1, y_max = 4\n
-    #          Количество итераций: {30}\n
-    #          Экстремум: [{point.x}, {point.y}]
-    #          ''',
-    #          loc='left',
-    #          pad=1,
-    #          fontdict={'fontsize': 11}
-    #)
-    # plt.text(x=1.0, y=1.0, z=1.0, s=f'Точка экстремума x*: ["{point.x}", {point.y}]')
     #plt.show()
     pass
 
@@ -38,6 +26,19 @@ class Drawer:
   def AddPoint(self, point: Point):
     point_computed_by_extremum = self.__function(point.ToList())
     self.ax.scatter(point.x, point.y, point_computed_by_extremum, color='red')
+
+  def AddTitle(self, k: int, extr: Point):
+    plt.title(label=f'''
+        График функции: f(x1, x2) = -(x1 - 2x2^2 + 4x2)\n 
+        Интервал: x_min = -4, x_max = 4; y_min = -4, y_max = 4\n
+        Количество итераций: {k}\n
+        Экстремум: [{extr.x}, {extr.y}]
+        ''',
+        loc='left',
+        pad=1,
+        fontdict={'fontsize': 11}
+    )
+    #plt.text(x=1.0, y=1.0, z=1.0, s=f'Точка экстремума x*: ["{extr.x}", {extr.y}]')
 
   def Show(self):
       plt.show()
